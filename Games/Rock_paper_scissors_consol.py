@@ -9,7 +9,7 @@ def main():
     print('============================')
     count = count_round()
 
-def pve:
+def pve():
     pass
 
 def pvp():
