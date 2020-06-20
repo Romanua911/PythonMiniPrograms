@@ -1,16 +1,18 @@
 import random
 
+
 class Player:
-    def __init__(self, chooses, identification, win, history):
+    def __init__(self, chooses, identification, win):
         self.identification = identification
         self.chooses = chooses
         self.win = win
-        self.history = history
+        self.history = []
 
-    def choose(self,chooses,history):
-        self.history = history.append(self.chooses)
+    def choose(self, chooses):
         self.chooses = chooses
+        self.history.append(self.chooses)
 
+# TODO add class for elements what can chose player
 
 def main():
     print('============================')
@@ -20,16 +22,40 @@ def main():
     print('============================')
     count = count_round()
     print('============================')
-    print('|| Game start             ||')
+    print('||Game start             ||')
     print('============================')
-    game()
+    game(count)
+    print(" GAME END ")
 
-def game():
-    human = Player(0, 1, 0, [])
-    computer = Player(0, 1, 0, [])
+def game(count):
+    human = Player(0, 1, 0)
+    computer = Player(0, 1, 0)
+    for i in range(count):
+        print("Round:"+str(i+1))
+        print("First player choose ")
+        print("r - ROCK | p - paper | s - scissor ")
+        human.choose(input("Choose:"))
+        # TODO add input validator
+        print("Computer choose ")
+        print("r - ROCK | p - paper | s - scissor ")
+        computer.choose(random.choice(['r','p','s']))
+        print('Choose:'+computer.chooses)
+        checkwinner(human,computer)
+    print("Player win {} round".format(human.win))
+    print("Computer win {} round".format(computer.win))
+    # TODO add ho is winner
 
 
-    return True
+def checkwinner(firstplayer, secondplayer):
+    if firstplayer.chooses == secondplayer.chooses:
+        pass
+    elif firstplayer.chooses == 'r' and secondplayer.chooses == 's':
+        firstplayer.win += 1
+    elif firstplayer.chooses == 's' and secondplayer.chooses == 'p':
+        firstplayer.win += 1
+    else:
+        secondplayer.win += 1
+
 
 def count_round():
     print('============================')
